@@ -9195,6 +9195,47 @@ paths:
               Since: cosmos-sdk 0.47
       tags:
         - Msg
+  /firstcosmos.firstcosmos.Msg/Hello:
+    post:
+      operationId: FirstcosmosFirstcosmosMsg_Hello
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              fromAddress:
+                type: string
+              toAddress:
+                type: string
+      tags:
+        - Msg
   /firstcosmos.firstcosmos.Msg/UpdateParams:
     post:
       summary: |-
@@ -9243,18 +9284,15 @@ paths:
                   authority is the address that controls the module (defaults to
                   x/gov unless overwritten).
               params:
-                description: |-
-                  params defines the module parameters to update.
-
-                  NOTE: All parameters must be supplied.
+                description: 'NOTE: All parameters must be supplied.'
                 type: object
             description: MsgUpdateParams is the Msg/UpdateParams request type.
       tags:
         - Msg
-  /first-cosmos/firstmodule/params:
+  /first-cosmos/firstcosmos/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: FirstcosmosFirstmoduleQuery_Params
+      operationId: FirstcosmosFirstcosmosQuery_Params
       responses:
         '200':
           description: A successful response.
@@ -20098,6 +20136,17 @@ definitions:
           min_commission_rate is the chain-wide minimum commission rate that a
           validator can charge their delegators
     description: Params defines the parameters for the x/staking module.
+  firstcosmos.firstcosmos.MsgHello:
+    type: object
+    properties:
+      creator:
+        type: string
+      fromAddress:
+        type: string
+      toAddress:
+        type: string
+  firstcosmos.firstcosmos.MsgHelloResponse:
+    type: object
   firstcosmos.firstcosmos.MsgUpdateParams:
     type: object
     properties:
@@ -20107,10 +20156,7 @@ definitions:
           authority is the address that controls the module (defaults to x/gov
           unless overwritten).
       params:
-        description: |-
-          params defines the module parameters to update.
-
-          NOTE: All parameters must be supplied.
+        description: 'NOTE: All parameters must be supplied.'
         type: object
     description: MsgUpdateParams is the Msg/UpdateParams request type.
   firstcosmos.firstcosmos.MsgUpdateParamsResponse:
@@ -20121,10 +20167,7 @@ definitions:
   firstcosmos.firstcosmos.Params:
     type: object
     description: Params defines the parameters for the module.
-  firstcosmos.firstmodule.Params:
-    type: object
-    description: Params defines the parameters for the module.
-  firstcosmos.firstmodule.QueryParamsResponse:
+  firstcosmos.firstcosmos.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -20151,6 +20194,9 @@ definitions:
     description: |-
       MsgUpdateParamsResponse defines the response structure for executing a
       MsgUpdateParams message.
+  firstcosmos.firstmodule.Params:
+    type: object
+    description: Params defines the parameters for the module.
   ibc.applications.fee.v1.Fee:
     type: object
     properties:

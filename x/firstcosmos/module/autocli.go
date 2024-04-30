@@ -28,6 +28,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
+				{
+					RpcMethod:      "Hello",
+					Use:            "hello [from-address] [to-address]",
+					Short:          "Send a hello tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "fromAddress"}, {ProtoField: "toAddress"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
