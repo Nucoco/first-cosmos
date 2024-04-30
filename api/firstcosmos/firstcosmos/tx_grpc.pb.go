@@ -22,6 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Msg_UpdateParams_FullMethodName = "/firstcosmos.firstcosmos.Msg/UpdateParams"
 	Msg_Hello_FullMethodName        = "/firstcosmos.firstcosmos.Msg/Hello"
+	Msg_CreatePeople_FullMethodName = "/firstcosmos.firstcosmos.Msg/CreatePeople"
+	Msg_UpdatePeople_FullMethodName = "/firstcosmos.firstcosmos.Msg/UpdatePeople"
+	Msg_DeletePeople_FullMethodName = "/firstcosmos.firstcosmos.Msg/DeletePeople"
 )
 
 // MsgClient is the client API for Msg service.
@@ -32,6 +35,9 @@ type MsgClient interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	Hello(ctx context.Context, in *MsgHello, opts ...grpc.CallOption) (*MsgHelloResponse, error)
+	CreatePeople(ctx context.Context, in *MsgCreatePeople, opts ...grpc.CallOption) (*MsgCreatePeopleResponse, error)
+	UpdatePeople(ctx context.Context, in *MsgUpdatePeople, opts ...grpc.CallOption) (*MsgUpdatePeopleResponse, error)
+	DeletePeople(ctx context.Context, in *MsgDeletePeople, opts ...grpc.CallOption) (*MsgDeletePeopleResponse, error)
 }
 
 type msgClient struct {
@@ -60,6 +66,33 @@ func (c *msgClient) Hello(ctx context.Context, in *MsgHello, opts ...grpc.CallOp
 	return out, nil
 }
 
+func (c *msgClient) CreatePeople(ctx context.Context, in *MsgCreatePeople, opts ...grpc.CallOption) (*MsgCreatePeopleResponse, error) {
+	out := new(MsgCreatePeopleResponse)
+	err := c.cc.Invoke(ctx, Msg_CreatePeople_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) UpdatePeople(ctx context.Context, in *MsgUpdatePeople, opts ...grpc.CallOption) (*MsgUpdatePeopleResponse, error) {
+	out := new(MsgUpdatePeopleResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdatePeople_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DeletePeople(ctx context.Context, in *MsgDeletePeople, opts ...grpc.CallOption) (*MsgDeletePeopleResponse, error) {
+	out := new(MsgDeletePeopleResponse)
+	err := c.cc.Invoke(ctx, Msg_DeletePeople_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -68,6 +101,9 @@ type MsgServer interface {
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	Hello(context.Context, *MsgHello) (*MsgHelloResponse, error)
+	CreatePeople(context.Context, *MsgCreatePeople) (*MsgCreatePeopleResponse, error)
+	UpdatePeople(context.Context, *MsgUpdatePeople) (*MsgUpdatePeopleResponse, error)
+	DeletePeople(context.Context, *MsgDeletePeople) (*MsgDeletePeopleResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -80,6 +116,15 @@ func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*
 }
 func (UnimplementedMsgServer) Hello(context.Context, *MsgHello) (*MsgHelloResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Hello not implemented")
+}
+func (UnimplementedMsgServer) CreatePeople(context.Context, *MsgCreatePeople) (*MsgCreatePeopleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePeople not implemented")
+}
+func (UnimplementedMsgServer) UpdatePeople(context.Context, *MsgUpdatePeople) (*MsgUpdatePeopleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePeople not implemented")
+}
+func (UnimplementedMsgServer) DeletePeople(context.Context, *MsgDeletePeople) (*MsgDeletePeopleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePeople not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -130,6 +175,60 @@ func _Msg_Hello_Handler(srv interface{}, ctx context.Context, dec func(interface
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CreatePeople_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreatePeople)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreatePeople(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_CreatePeople_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreatePeople(ctx, req.(*MsgCreatePeople))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_UpdatePeople_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdatePeople)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdatePeople(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdatePeople_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdatePeople(ctx, req.(*MsgUpdatePeople))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DeletePeople_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeletePeople)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeletePeople(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeletePeople_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeletePeople(ctx, req.(*MsgDeletePeople))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -144,6 +243,18 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Hello",
 			Handler:    _Msg_Hello_Handler,
+		},
+		{
+			MethodName: "CreatePeople",
+			Handler:    _Msg_CreatePeople_Handler,
+		},
+		{
+			MethodName: "UpdatePeople",
+			Handler:    _Msg_UpdatePeople_Handler,
+		},
+		{
+			MethodName: "DeletePeople",
+			Handler:    _Msg_DeletePeople_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

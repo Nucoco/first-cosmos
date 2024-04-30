@@ -1,17 +1,20 @@
 syntax = "proto3";
+
 package firstcosmos.firstcosmos;
 
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "firstcosmos/firstcosmos/params.proto";
+import "firstcosmos/firstcosmos/people.proto";
 
 option go_package = "first-cosmos/x/firstcosmos/types";
 
 // GenesisState defines the firstcosmos module's genesis state.
 message GenesisState {
+  
   // params defines all the parameters of the module.
-  Params params = 1 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+           Params params      = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated People peopleList  = 2 [(gogoproto.nullable) = false] ;
+           uint64 peopleCount = 3;
 }
+

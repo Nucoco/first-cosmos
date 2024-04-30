@@ -1,0 +1,11 @@
+syntax = "proto3";
+package firstcosmos.firstcosmos;
+
+option go_package = "first-cosmos/x/firstcosmos/types";
+
+message People {
+  uint64 id = 1;
+  string address = 2; 
+  string name = 3; 
+  string creator = 4;
+}
