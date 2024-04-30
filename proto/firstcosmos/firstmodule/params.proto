@@ -1,0 +1,15 @@
+syntax = "proto3";
+package firstcosmos.firstmodule;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "first-cosmos/x/firstmodule/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "firstcosmos/x/firstmodule/Params";
+  option (gogoproto.equal) = true;
+
+  
+}

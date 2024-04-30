@@ -54,8 +54,11 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	firstcosmosmodulev1 "first-cosmos/api/firstcosmos/firstcosmos/module"
+	firstmodulemodulev1 "first-cosmos/api/firstcosmos/firstmodule/module"
 	_ "first-cosmos/x/firstcosmos/module" // import for side-effects
 	firstcosmosmoduletypes "first-cosmos/x/firstcosmos/types"
+	_ "first-cosmos/x/firstmodule/module" // import for side-effects
+	firstmodulemoduletypes "first-cosmos/x/firstmodule/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -95,6 +98,7 @@ var (
 		circuittypes.ModuleName,
 		// chain modules
 		firstcosmosmoduletypes.ModuleName,
+		firstmodulemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -120,6 +124,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		firstcosmosmoduletypes.ModuleName,
+		firstmodulemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -139,6 +144,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		firstcosmosmoduletypes.ModuleName,
+		firstmodulemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -297,6 +303,10 @@ var (
 			{
 				Name:   firstcosmosmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&firstcosmosmodulev1.Module{}),
+			},
+			{
+				Name:   firstmodulemoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&firstmodulemodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},
